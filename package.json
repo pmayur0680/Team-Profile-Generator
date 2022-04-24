@@ -1,0 +1,25 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "Node.js command-line application",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pmayur0680/Team-Profile-Generator.git"
+  },
+  "author": "Mayur Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pmayur0680/Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/pmayur0680/Team-Profile-Generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.2"
+  }
+}

@@ -80,7 +80,7 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+# dist // remove `dist` from the `.gitignore` file so that Git will track this folder and include it when you push up to your application's repository.
 
 # Gatsby files
 .cache/
