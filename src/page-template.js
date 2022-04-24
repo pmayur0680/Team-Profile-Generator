@@ -1,5 +1,6 @@
 // Header of html file up to jumbotron
-const generateHeader = () => {
+
+const generateHTML = (teamMemberCards) => {
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -14,64 +15,74 @@ const generateHeader = () => {
         <div class="jumbotron bg-danger">
           <h1 class="text-center text-white">My Team</h1>
         </div>
-        <div class="d-flex flex-wrap justify-content-around">`;
-}
-// footer of file
-const generateFooter = () => {
-    return `</div>
+        <div class="d-flex flex-wrap justify-content-around">
+        ${teamMemberCards}
+        </div>
     </div>
     </body>
-    </html>`;    
+    </html>`;
+}
+
+const generateTeamPage = (teamMembers) => {
+    let cards = '';
+    for (let index = 0; index < teamMembers.length; index++) {
+        const teamMember = teamMembers[index];
+        if(teamMember.getRole() == "Manager")
+        cards+=generateManagerCard(teamMember);        
+        else if(teamMember.getRole() == "Engineer")
+        cards+=generateEngineerCard(teamMember);        
+        else if(teamMember.getRole() == "Intern")
+        cards+=generateInternCard(teamMember);                                
+    }    
+    return generateHTML(cards);        
 }
 // generate manager card based on user input
-const generateManagerCard = ({ name, id, email, officeNumber, role }) => {
+const generateManagerCard = (manager) => {
     return `<div class="card mb-2" style="width: 18rem;">
-    <h2 class="card-title bg-primary text-center text-white">${name}
-      <p class="mt-2 h4"><i class="fa-solid fa-mug-hot"></i> ${role}</p>
+    <h2 class="card-title bg-primary text-center text-white">${manager.name}
+      <p class="mt-2 h4"><i class="fa-solid fa-mug-hot"></i> Manager</p>
     </h2>      
     <div class="card-body">
       <ul class="list-group">
-      <li class="list-group-item">Id: ${id}</li>
-      <li class="list-group-item">Email: <a href='mailto:${email}'>${email}</a></li>
-      <li class="list-group-item">Office Number: ${officeNumber}</li>  
+      <li class="list-group-item">Id: ${manager.id}</li>
+      <li class="list-group-item">Email: <a href='mailto:${manager.email}'>${manager.email}</a></li>
+      <li class="list-group-item">Office Number: ${manager.getOfficeNumber()}</li>  
       </ul>
     </div>
   </div> `;
 }
 // generate engineer card based on user input
-const generateEngineerCard = ({ name, id, email, gitUsername, role }) => {
+const generateEngineerCard = (engineer) => {
     return `<div class="card mb-2" style="width: 18rem;">
-    <h2 class="card-title bg-primary text-center text-white">${name}
-      <p class="mt-2 h4"><i class="fa-solid fa-glasses"></i> ${role}</p>
+    <h2 class="card-title bg-primary text-center text-white">${engineer.name}
+      <p class="mt-2 h4"><i class="fa-solid fa-glasses"></i> Engineer</p>
     </h2>      
     <div class="card-body">
       <ul class="list-group">
-      <li class="list-group-item">Id: ${id}</li>
-      <li class="list-group-item">Email: <a href='mailto:${email}'>${email}</a></li>
-      <li class="list-group-item"><a href='https://github.com/${gitUsername}'>${gitUsername}</a></li>
+      <li class="list-group-item">Id: ${engineer.id}</li>
+      <li class="list-group-item">Email: <a href='mailto:${engineer.email}'>${engineer.email}</a></li>
+      <li class="list-group-item">
+      <a href='https://github.com/${engineer.getGithub()}'>${engineer.getGithub()}</a>
+      </li>
       </ul>
     </div>
   </div> `;
 }
 // generate intern card based on user input
-const generateInternCard = ({ name, id, email, school, role }) => {
+const generateInternCard = (intern) => {
     return `<div class="card mb-2" style="width: 18rem;">
-    <h2 class="card-title bg-primary text-center text-white">${name}
-      <p class="mt-2 h4"><i class="fa-solid fa-mug-hot"></i> ${role}</p>
+    <h2 class="card-title bg-primary text-center text-white">${intern.name}
+      <p class="mt-2 h4"><i class="fa-solid fa-user-graduate"></i> Intern</p>
     </h2>      
     <div class="card-body">
       <ul class="list-group">
-      <li class="list-group-item">Id: ${id}</li>
-      <li class="list-group-item">Email: <a href='mailto:${email}'>${email}</a></li>
-      <li class="list-group-item">${school}</li>
+      <li class="list-group-item">Id: ${intern.id}</li>
+      <li class="list-group-item">Email: <a href='mailto:${intern.email}'>${intern.email}</a></li>
+      <li class="list-group-item">${intern.getSchool()}</li>
       </ul>
     </div>
   </div> `;
 }
-module.exports = {
-    generateHeader,
-    generateFooter,
-    generateManagerCard,
-    generateEngineerCard,
-    generateInternCard
+module.exports = {    
+    generateTeamPage
 };
