@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/pmayur0680/Team-Profile-Generator#readme",
   "dependencies": {
-    "inquirer": "^8.2.2"
+    "inquirer": "^8.2.2",
+    "jest": "^27.5.1"
   }
 }
